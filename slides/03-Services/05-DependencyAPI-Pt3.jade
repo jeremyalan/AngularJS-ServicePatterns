@@ -1,0 +1,17 @@
+section
+    h2 Dependencies
+    h3
+        span.no-upper $inject
+
+    ul
+        li Use string values to counteract minification
+        li $inject is tied to class declaration, not module registration
+
+    pre.
+        var MyService = function ($http) {
+            ...
+        };
+        MyService.$inject = ['$http'];
+
+        angular.module('myModule')
+            .service('$myService', MyService);

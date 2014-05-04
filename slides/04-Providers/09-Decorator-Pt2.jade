@@ -1,0 +1,22 @@
+section
+    h2 Decorator
+
+    div
+        span Modify a service using decorator
+
+    pre.
+        angular.module('api')
+            .decorator('$person', function ($q, $delegate) {
+                var personCache = {};
+
+                var fetch = $delegate.fetch;
+                <span class="highlight">$delegate.fetch = function (id) {
+                    if (personCache[id]) {
+                        return $q.when(personCache[id]);
+                    }
+
+                    return fetch(id);
+                };
+                </span>
+                return $delegate;
+            });

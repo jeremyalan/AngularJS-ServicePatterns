@@ -1,0 +1,41 @@
+section
+    h2 Provider
+
+    div
+        span Example
+
+    div.small-65
+        pre.
+            angular.module('api')
+                .provider('$person', function () {
+                    var personCache = { };
+                    var provider = { cache: false };
+
+                    provider.$get = function ($q, http) {
+                        return {
+                            fetch: function (id) {
+                                <span class="highlight">
+                                if (provider.cache && personCache[id]) {
+                                    return $q.when(personCache[id]);
+                                }
+                                </span>
+                                return $http.get('/api/persons/' + id)
+                                    .then(function (result) {
+                                        <span class="highlight">
+                                        if (provider.cache) {
+                                            personCache[id] = result.data;
+                                        }
+                                        </span>
+                                        return result.data;
+                                    });
+                            }
+                        };
+                    };
+
+                    return provider;
+                });
+
+            angular.module('myApp')
+                .config(function ($personProvider) {
+                    $personProvider.cache = true;
+                });

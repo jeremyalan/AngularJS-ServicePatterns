@@ -1,0 +1,23 @@
+section
+    h2 Controllers
+
+    div
+        span module.controller(...)
+
+    pre.
+        function CreatePersonCtrl($scope, $person) {
+            $scope.model = {};
+
+            $scope.create = function () {
+                var info = {
+                    FirstName: $scope.model.firstName;
+                    LastName: $scope.model.lastName;
+                };
+
+                $person.create(info)
+                    .then(...);
+            };
+        }
+
+        angular.module('app')
+            .controller('CreatePersonCtrl', CreatePersonCtrl);

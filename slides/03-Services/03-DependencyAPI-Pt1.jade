@@ -1,0 +1,19 @@
+section
+    h2 Dependencies
+    h3 Inline Declaration
+
+    .break
+    ul
+        li Angular calls .toString() on constructor function
+        li
+            span.underline DOES NOT WORK
+            span  with minified code
+
+    pre.
+        var MyService = function ($http) {
+            ...
+        };
+
+        angular.module('myModule')
+            .service('$myService', MyService);
+

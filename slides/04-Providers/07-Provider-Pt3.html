@@ -1,0 +1,13 @@
+<section><h2>Provider</h2><div class="break"></div><ul><li><span>Strong separation between&nbsp;</span><span class="underline">configuration</span><span>&nbsp;and&nbsp;</span><span class="underline">consumption</span></li><li><div>Creates two injectable instances</div><div><pre>$myService, $myServiceProvider</pre></div></li><li><div>Providers can be injected into config callbacks</div><div><pre>// Fail!
+angular.module('...')
+    .config(function ($myService) { ... });
+    
+// OK!
+angular.module('...')
+    .config(function ($myServiceProvider) { ... });
+    
+angular.module('...')
+    .run(function ($myService) { ... });
+    
+angular.module('...')
+    .run(function ($myServiceProvider) { ... });</pre></div></li></ul></section>

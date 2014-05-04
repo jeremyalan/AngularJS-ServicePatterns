@@ -1,0 +1,20 @@
+section
+    h2 Decorator
+
+    div
+        span module.decorator(...)
+
+    pre.
+        angular.module('api')
+            .decorator('$person', function ($delegate) {
+                var newInstance = {};
+
+                // ...
+
+                return newInstance;
+            });
+    ul
+        li
+            span Use&nbsp;
+            span.pre $delegate
+            span &nbsp;to inject the service

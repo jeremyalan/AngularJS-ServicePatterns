@@ -1,0 +1,15 @@
+section
+    h2 Factory
+
+    div
+        span module.factory(...)
+
+    pre.
+        angular.module('api')
+            .factory('$person', function ($http) {
+                <span class="highlight">return {</span>
+                    create: function (info) {
+                        return $http.post('/api/person', info);
+                    }
+                <span class="highlight">};</span>
+            });

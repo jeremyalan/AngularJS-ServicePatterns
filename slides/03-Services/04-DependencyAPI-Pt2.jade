@@ -1,0 +1,17 @@
+section
+    h2 Dependencies
+    h3 Array arguments
+
+    .break
+    ul
+        li Uses string values to counteract minification
+        li Similar syntax to other module components (directives)
+        li Class declaration tightly coupled to module registration
+
+    pre.
+        var MyService = function ($http) {
+            ...
+        };
+
+        angular.module('myModule')
+            .service('$myService', ['$http', MyService]);

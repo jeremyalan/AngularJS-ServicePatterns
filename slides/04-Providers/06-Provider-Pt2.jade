@@ -1,0 +1,31 @@
+section
+    h2 Provider
+
+    .break
+    ul
+        li
+            span Strong separation between&nbsp;
+            span.underline configuration
+            span &nbsp;and&nbsp;
+            span.underline consumption
+        li
+            div Creates two injectable instances
+            div
+                pre $myService, $myServiceProvider
+        li
+            div Providers can be injected into config callbacks
+            div.small-85
+                pre.
+                    // Fail!
+                    angular.module('...')
+                        .config(function ($myService) { ... });
+
+                    // OK!
+                    angular.module('...')
+                        .config(function ($myServiceProvider) { ... });
+
+                    angular.module('...')
+                        .run(function ($myService) { ... });
+
+                    angular.module('...')
+                        .run(function ($myServiceProvider) { ... });

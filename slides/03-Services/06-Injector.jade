@@ -1,0 +1,19 @@
+section
+    h2
+        span.no-upper $injector
+
+    div Angular's implementation of the Service Locator pattern
+
+    .break
+    ul
+        li Created automatically during app initialization
+        li
+            span Can be used at runtime against any function
+            br
+            pre.
+                $injector.invoke(function (dep) { ... });
+        li
+            span Or, create your own!
+            br
+            pre.
+                var injector = angular.injector(['ng', 'mod1']);

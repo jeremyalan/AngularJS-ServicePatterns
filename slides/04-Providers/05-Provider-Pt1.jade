@@ -1,0 +1,19 @@
+section
+    h2 Provider
+
+    div
+        span module.provider(...)
+
+    pre.
+        angular.module('api')
+            .provider('$person', function () {
+                <span class="highlight">return {</span>
+                    <span class="highlight">$get:</span> function ($http) {
+                        return {
+                            create: function (info) {
+                                return $http.post('/api/person', info);
+                            }
+                        };
+                    <span class="highlight">}</span>
+                <span class="highlight">};</span>
+            });

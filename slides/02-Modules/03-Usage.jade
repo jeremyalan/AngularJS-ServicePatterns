@@ -1,0 +1,25 @@
+section
+    h2 Modules
+
+    div
+        span Create a new module
+        pre.
+            angular.module('myModule', ['dep1', 'dep2']);
+
+    .break
+    div
+        span Retrieve an existing module
+        pre.
+            angular.module('myModule');
+
+            // Order of execution matters!
+            // This fails if module has not been declared yet
+
+    .break
+    div
+        span Initialize a module
+        pre.
+            angular.module('myModule')
+                .config(function () { ... })
+                .run(function () { ... })
+        span.small More on this later...
