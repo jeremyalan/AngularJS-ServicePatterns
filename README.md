@@ -1,4 +1,4 @@
-TypeScript: The Good Parts
+AngularJS: Service Patterns
 =======================
 
 Contains a web-based presentation about service patterns AngularJS.
