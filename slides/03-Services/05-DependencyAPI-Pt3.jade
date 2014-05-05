@@ -8,10 +8,10 @@ section
         li $inject is tied to class declaration, not module registration
 
     pre.
-        var MyService = function ($http) {
+        function MyService($http) {
             ...
         };
-        MyService.$inject = ['$http'];
+        <span class="highlight">MyService.$inject = ['$http'];</span>
 
         angular.module('myModule')
             .service('$myService', MyService);

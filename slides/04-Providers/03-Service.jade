@@ -6,11 +6,10 @@ section
 
     pre.
         function PersonService($http) {
-            this.create = (info) {
+            this.create = function (info) {
                 return $http.post('/api/person', info);
             };
         }
 
         angular.module('api')
-            .service('$person', <span class="highlight">PersonService</span>)
-            .service('$person', <span class="highlight">['$http', PersonService]</span>)
+            .service('$person', <span class="highlight">PersonService</span>);

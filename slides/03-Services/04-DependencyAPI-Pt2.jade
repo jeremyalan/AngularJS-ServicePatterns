@@ -9,9 +9,9 @@ section
         li Class declaration tightly coupled to module registration
 
     pre.
-        var MyService = function ($http) {
+        function MyService($http) {
             ...
         };
 
         angular.module('myModule')
-            .service('$myService', ['$http', MyService]);
+            .service('$myService', <span class="highlight">['$http', MyService]</span>);

@@ -8,33 +8,32 @@
 // This fails if module has not been declared yet
 </pre></div><div class="break"></div><div><span>Initialize a module</span><pre>angular.module('myModule')
     .config(function () { ... })
-    .run(function () { ... })</pre><span class="small">More on this later...</span></div></section></section><section><section><h2>Services</h2><p><span>Custom objects that are shared across your application</span></p><div class="break"></div><ul><li>Singletons</li><li><span>Injectable&nbsp;</span><span class="small">> let's dig a little deeper...</span></li></ul></section><section><h2>Dependency Injection</h2><div><span>Allows services to be passed into a dependent module,</span><br><span>such as a controller, directive, or another service</span></div><div class="break"></div><h3>Why should we care?</h3><ul><li>Supports testability</li><li>Discourages the use of global variables</li><li><div>Allows for complex configuration scenarios</div><div class="text-center small">More on this later...</div></li></ul></section><section><h2>Dependencies</h2><h3>Inline Declaration</h3><div class="break"></div><ul><li>Angular calls .toString() on constructor function</li><li><span class="underline">DOES NOT WORK</span><span> with minified code</span></li></ul><pre>var MyService = function ($http) {
+    .run(function () { ... })</pre><span class="small">More on this later...</span></div></section></section><section><section><h2>Services</h2><p><span>Custom objects that are shared across your application</span></p><div class="break"></div><ul><li>Singletons</li><li><span>Injectable&nbsp;</span><span class="small">> let's dig a little deeper...</span></li></ul></section><section><h2>Dependency Injection</h2><div><span>Allows services to be passed into a dependent module,</span><br><span>such as a controller, directive, or another service</span></div><div class="break"></div><h3>Why should we care?</h3><ul><li>Supports testability</li><li>Discourages the use of global variables</li><li><div>Allows for complex configuration scenarios</div><div class="text-center small">More on this later...</div></li></ul></section><section><h2>Dependencies</h2><h3>Inline Declaration</h3><div class="break"></div><ul><li>Angular calls .toString() on constructor function</li><li><span class="underline">DOES NOT WORK</span><span> with minified code</span></li></ul><pre>function MyService(<span class="highlight">$http</span>) {
     ...
 };
 
 angular.module('myModule')
     .service('$myService', MyService);
-    </pre></section><section><h2>Dependencies</h2><h3>Array arguments</h3><div class="break"></div><ul><li>Uses string values to counteract minification</li><li>Similar syntax to other module components (directives)</li><li>Class declaration tightly coupled to module registration</li></ul><pre>var MyService = function ($http) {
+    </pre></section><section><h2>Dependencies</h2><h3>Array arguments</h3><div class="break"></div><ul><li>Uses string values to counteract minification</li><li>Similar syntax to other module components (directives)</li><li>Class declaration tightly coupled to module registration</li></ul><pre>function MyService($http) {
     ...
 };
 
 angular.module('myModule')
-    .service('$myService', ['$http', MyService]);</pre></section><section><h2>Dependencies</h2><h3><span class="no-upper">$inject</span></h3><ul><li>Use string values to counteract minification</li><li>$inject is tied to class declaration, not module registration</li></ul><pre>var MyService = function ($http) {
+    .service('$myService', <span class="highlight">['$http', MyService]</span>);</pre></section><section><h2>Dependencies</h2><h3><span class="no-upper">$inject</span></h3><ul><li>Use string values to counteract minification</li><li>$inject is tied to class declaration, not module registration</li></ul><pre>function MyService($http) {
     ...
 };
-MyService.$inject = ['$http'];
+<span class="highlight">MyService.$inject = ['$http'];</span>
 
 angular.module('myModule')
     .service('$myService', MyService);</pre></section><section><h2><span class="no-upper">$injector</span></h2><div>Angular's implementation of the Service Locator pattern</div><div class="break"></div><ul><li>Created automatically during app initialization</li><li><span>Can be used at runtime against any function</span><br><pre>$injector.invoke(function (dep) { ... });</pre></li><li><span>Or, create your own!</span><br><pre>var injector = angular.injector(['ng', 'mod1']);</pre></li></ul></section></section><section><section><h2>Services</h2><ul><li><b>Constant/Value</b><br><span class="small">- Pass an instance</span></li><li><b>Service</b><br><span class="small">- Pass a constructor function</span></li><li><b>Factory</b><br><span class="small">- Pass a function that returns an instance</span></li><li><b>Provider</b><br><span class="small">- Pass a function that returns a "service object"</span></li><li><b>Decorator</b><br><span class="small">- Transform or replace an instance during creation</span></li></ul></section><section><h2>Constant</h2><div><span>module.constant(...)</span></div><pre>angular.module('api')
     .constant('$apiKey', <span class="highlight">'1234567890abcdef'</span>);</pre></section><section><h2>Service</h2><div><span>module.service(...)</span></div><pre>function PersonService($http) {
-    this.create = (info) {
+    this.create = function (info) {
         return $http.post('/api/person', info);
     };
 }
 
 angular.module('api')
-    .service('$person', <span class="highlight">PersonService</span>)
-    .service('$person', <span class="highlight">['$http', PersonService]</span>)</pre></section><section><h2>Factory</h2><div><span>module.factory(...)</span></div><pre>angular.module('api')
+    .service('$person', <span class="highlight">PersonService</span>);</pre></section><section><h2>Factory</h2><div><span>module.factory(...)</span></div><pre>angular.module('api')
     .factory('$person', function ($http) {
         <span class="highlight">return {</span>
             create: function (info) {
